@@ -1,5 +1,5 @@
 /* Ghost Links SW: caches only this site's own static files; cross-origin and non-GET bypass. */
-var VERSION='gl-shell-20261029a';
+var VERSION='gl-shell-20261029a-fb';
 var SHELL=['/','/assets/avatar.jpg','/assets/favicon.png','/assets/icons/icon-192.png','/assets/icons/icon-512.png','/manifest.webmanifest'];
 self.addEventListener('install',function(e){e.waitUntil(caches.open(VERSION).then(function(c){return c.addAll(SHELL)}).then(function(){return self.skipWaiting()}))});
 self.addEventListener('activate',function(e){e.waitUntil(caches.keys().then(function(k){return Promise.all(k.filter(function(x){return x.indexOf('gl-shell-')===0&&x!==VERSION}).map(function(x){return caches.delete(x)}))}).then(function(){return self.clients.claim()}))});
